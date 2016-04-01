@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <style type="text/css">
+
+      .canvas,
+      .diagonal,
+      .frame,
+      .axis path,
+      .axis line{
+        shape-rendering:crispEdges;
+        stroke:#aaa;
+        fill:none;
+      }
+
+      .axis path{
+        display:none;
+      }
+
+      .scatterplot-marker{
+        pointer-events:all;
+        stroke-opacity:1;
+      }
+      .marker{
+        stroke:black;
+        stroke-width:0;
+        fill-opacity:0.75;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="bundle.js"></script>
+  </body>
+</html>
