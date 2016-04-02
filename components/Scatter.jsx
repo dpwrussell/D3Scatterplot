@@ -87,7 +87,7 @@ export default class Scatter extends React.Component {
           <div className="row">
             <div className="col-md-4">
               <Picker targets={ targets }
-                      color={ colors }
+                      colors={ colors }
                       hovering={ hovering }
                       pivot={ pivot }
                       selected={ selected }

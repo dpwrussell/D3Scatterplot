@@ -50,7 +50,7 @@ export default class Picker extends React.Component {
 
   render() {
 
-    const { targets, hovering, pivot, selected, hoveringStart, hoveringEnd, selectTarget } = this.props;
+    const { targets, colors, hovering, pivot, selected, hoveringStart, hoveringEnd, selectTarget } = this.props;
 
     if (!targets) {
       return <h1>"Empty Picker"</h1>;
@@ -58,21 +58,30 @@ export default class Picker extends React.Component {
 
     const labels = targets.map(target => {
 
-      let labelClass = 'label';
+      let labelClass = 'no-select label';
+      let color;
+
       if (target === pivot) {
+        // TODO Dieeferentiate the pivot in some other way
         labelClass += ' label-primary';
       } else if (selected.has(target)) {
-        labelClass += ' label-info';
+        color = colors.get(target);
       } else if (target === hovering) {
-        labelClass += ' label-success';
+        color = colors.get(target);
       } else {
         labelClass += ' label-default';
       }
 
+      const style = {
+        display: 'inline-block',
+        marginLeft: '5px',
+        backgroundColor: color
+      };
+
       return (
         <span key={ target }
               className={ labelClass }
-              style={ {display: 'inline-block', marginLeft: '5px'} }
+              style={ style }
               onMouseOver={ this.handleOver }
               onMouseEnter={ hoveringStart.bind(this, target) }
               onMouseLeave={ hoveringEnd }
@@ -80,11 +89,19 @@ export default class Picker extends React.Component {
       );
     });
 
+    const key = Array.from(selected)
+      .map(sel => <li key={ sel }><span style={ {color: colors.get(sel)} }>{ pivot } &rarr; { sel }</span></li>)
+
     return (
       <div className="panel panel-default">
         <div className="panel-heading">Target</div>
         <div>
           { labels }
+        </div>
+        <div>
+          <ul>
+            { key }
+          </ul>
         </div>
       </div>
     );

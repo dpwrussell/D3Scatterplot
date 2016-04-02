@@ -22,9 +22,9 @@ export default class Plot extends React.Component {
     // Create new virtual dom which d3 can manipulate
     const faux = new Faux.Element('div');
 
-    const margin = {top: 30, right: 30, bottom: 30, left: 30};
-    const width = 600 - margin.left - margin.right;
-    const height = 600 - margin.top - margin.bottom;
+    const margin = {top: 0, right: 0, bottom: 30, left: 30};
+    const width = 300 - margin.left - margin.right;
+    const height = 300 - margin.top - margin.bottom;
 
     // Create the canvas
     const svg = d3.select(faux).append("svg")
@@ -108,7 +108,7 @@ export default class Plot extends React.Component {
 
     // If there is a pivot and a target is hovered, render those
     // TODO Unless it is the pivot or already selected. Perhaps emphasise in that case
-    if (pivot && hovering) {
+    if (pivot && hovering && selected.indexOf(hovering) === -1) {
       const pivotPoints = data
         .filter(d => d.target === pivot)
         .sort( (d1, d2) => {
