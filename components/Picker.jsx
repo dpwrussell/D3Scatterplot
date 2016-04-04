@@ -58,23 +58,20 @@ export default class Picker extends React.Component {
 
     const labels = targets.map(target => {
 
-      let labelClass = 'no-select label';
+      let labelClass = 'no-select label label-default';
       let color;
 
       if (target === pivot) {
-        // TODO Dieeferentiate the pivot in some other way
-        labelClass += ' label-primary';
+        labelClass += ' label-pivot';
+        color = colors.get(target);
       } else if (selected.has(target)) {
         color = colors.get(target);
       } else if (target === hovering) {
         color = colors.get(target);
-      } else {
-        labelClass += ' label-default';
       }
 
       const style = {
         display: 'inline-block',
-        marginLeft: '5px',
         backgroundColor: color
       };
 
