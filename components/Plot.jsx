@@ -9,9 +9,26 @@ const TRIANGLE = 'M0,-5.118326725061547L5.910134625029481,5.118326725061547 -5.9
 export default class Plot extends React.Component {
 
 
+  constructor() {
+    super();
+
+    this.state = {
+      hPoint: undefined
+    }
+
+    this.hoverPoint = this.hoverPoint.bind(this);
+  }
+
+  hoverPoint(cellLine) {
+    this.setState({
+      hPoint: cellLine
+    })
+  }
+
   render() {
 
     const { data, colors, hovering, pivot, selected } = this.props;
+    const { hPoint } = this.state;
 
     if (!data) {
       return (
@@ -150,8 +167,6 @@ export default class Plot extends React.Component {
           }
         }
       }
-
-
     }
 
     // If there are selections, render those
@@ -195,6 +210,18 @@ export default class Plot extends React.Component {
               shape.attr('d', TRIANGLE);
             } else if (pivotPoint.type === 'HR+') {
               shape.attr('d', SQUARE);
+            }
+
+            shape.on("mouseenter", () => {
+              this.hoverPoint(pivotPoint.cell_line);
+            });
+
+            shape.on("mouseleave", () => {
+              this.hoverPoint();
+            });
+
+            if (pivotPoint.cell_line === hPoint) {
+              shape.classed('shape-outline', true);
             }
           }
         }

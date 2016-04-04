@@ -91,7 +91,12 @@ export default class Picker extends React.Component {
 
     return (
       <div className="panel panel-default">
-        <div className="panel-heading">Target</div>
+        <div className="panel-heading">
+          <span>Target</span>
+          <button type="button"
+                  className="btn btn-default btn-xs pull-right"
+                  onClick={ selectTarget.bind(this, undefined) } >Clear</button>
+        </div>
         <div>
           { labels }
         </div>

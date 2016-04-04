@@ -32,8 +32,15 @@ export default class Scatter extends React.Component {
   }
 
   selectTarget(target) {
+    // If there is no target, clear the plot
+    if (target === undefined) {
+      this.setState({
+        pivot: undefined,
+        selected: new Set()
+      });
+
     // If there is no pivot, make this the pivot
-    if (!this.state.pivot) {
+    } else if (!this.state.pivot) {
       this.setState({
         pivot: target
       });
