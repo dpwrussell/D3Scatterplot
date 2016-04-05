@@ -87,7 +87,14 @@ export default class Picker extends React.Component {
     });
 
     const key = Array.from(selected)
-      .map(sel => <li key={ sel }><span style={ {color: colors.get(sel)} }>{ pivot } &rarr; { sel }</span></li>)
+      .map(sel =>
+        <li key={ sel }
+            className="list-unstyled">
+          <span style={ {color: colors.get(pivot)} }>{ pivot }</span>
+          <span> &rarr; </span>
+          <span style={ {color: colors.get(sel)} }>{ sel }</span>
+        </li>
+      )
 
     return (
       <div className="panel panel-default">
@@ -100,11 +107,11 @@ export default class Picker extends React.Component {
         <div>
           { labels }
         </div>
-        <div>
+        <p>
           <ul>
             { key }
           </ul>
-        </div>
+        </p>
       </div>
     );
   }
