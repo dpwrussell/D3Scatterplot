@@ -1,4 +1,5 @@
 import React from 'react';
+import Label from './Label';
 
 export default class Picker extends React.Component {
 
@@ -57,33 +58,14 @@ export default class Picker extends React.Component {
     }
 
     const labels = targets.map(target => {
-
-      let labelClass = 'no-select label label-default';
-      let color;
-
-      if (target === pivot) {
-        labelClass += ' label-pivot';
-        color = colors.get(target);
-      } else if (selected.has(target)) {
-        color = colors.get(target);
-      } else if (target === hovering) {
-        color = colors.get(target);
-      }
-
-      const style = {
-        display: 'inline-block',
-        backgroundColor: color
-      };
-
-      return (
-        <span key={ target }
-              className={ labelClass }
-              style={ style }
-              onMouseOver={ this.handleOver }
-              onMouseEnter={ hoveringStart.bind(this, target) }
-              onMouseLeave={ hoveringEnd }
-              onClick={ selectTarget.bind(this, target) }>{ target }</span>
-      );
+      return <Label hoveringStart={ hoveringStart }
+                    hoveringEnd={ hoveringEnd }
+                    selectTarget={ selectTarget }
+                    target={ target }
+                    pivot={ pivot }
+                    colors={ colors }
+                    selected={ selected }
+                    hovering={ hovering } />
     });
 
     const key = Array.from(selected)
